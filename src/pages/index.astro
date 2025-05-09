@@ -1,12 +1,59 @@
 ---
+import { TutorialButton } from '@/components/home/tutorial-button';
 import Layout from '../layouts/BaseLayout.astro';
+import { ExampleCodeEditor } from '@/components/home/example-code-editor';
 ---
 
 <Layout>
-	<main class="w-svw h-svh flex flex-col items-center justify-center gap-10 text-center">
-		<div class="bg-gray-900">
-			<h1 class="text-5xl font-bold"><span class="text-blue-800">console</span>.<span class="text-purple-700">log</span><span class="text-cyan-500">(</span><span class="text-green-500">"Hello, world!"</span><span class="text-cyan-500">)</span>;</h1>
+	<main class="container mx-auto p-2">
+		<!-- Hero section -->
+		<header class="flex md:flex-row gap-2">
+			<div class="md:basis-1/2 flex flex-col">
+				<h1 class="prose-h1 text-center">
+					Welcome to <span class="text-pink-500">code.altie122.xyz</span>
+				</h1>
+				<p class="prose-p">
+					Please note: this is <b>NOT</b> a code reference site; this website is for tutorials. I (altie) do, however, plan to add code references in the future. For now, I recommend using <a href="https://www.w3schools.com/" class="prose-a">w3schools</a> for your reference needs, as they are very informative and easy to understand.
+				</p>
+				<h2 class="prose-h2">
+					Learning to code? Curious about coding?
+				</h2>
+				<p class="prose-h3 text-center">
+					Check out some of my tutorials!
+				</p>
+				<TutorialButton />
+			</div>
+			<div class="md:basis-1/2">
+				<ExampleCodeEditor client:only="react" />
+			</div>
+		</header>
+		<div>
+		<h2 class="prose-h2">
+			Why does Code.altie122.xyz exist?
+		</h2>
+		<p class="prose-p">
+			I created Code.altie122.xyz because there are **very** few good resources for learning to code from start to finish.
+		</p>
+		<h2 class="prose-h2">
+			Why not use something else?
+		</h2>
+		<p class="prose-p">
+			Go for it! If you already have your eye on another resource, try it out. This site simply aims to centralize tutorials and make them easier to find. If you want something more complex and full-stack that leaves you with a working website, check out <a href="https://www.youtube.com/watch?v=c-hKSbzooAg" class="prose-a">this</a> (<a href="https://www.youtube-nocookie.com/embed/c-hKSbzooAg" class="prose-a">no-cookie version</a>) video by Theo (<a href="https://t3.gg" class="prose-a">t3.gg</a>). Although it’s a long video (roughly 3.5 hours), it will take you from zero to production. If you want something simpler, continue reading through this website. (**Neither I nor this site is affiliated with Theo/Ping Labs; they're just a good resource for more advanced topics.**)
+		</p>
+		<h2 class="prose-h2">
+			What is the difference between this website and w3schools?
+		</h2>
+		<p class="prose-p">
+			w3schools is a great resource; however, it is more of a reference site that occasionally becomes a tutorial site. I highly recommend using w3schools to look up what things do, but if you want to learn step-by-step, following a tutorial is often more effective. I say this not just because I want you to use this site—though that’s a nice side effect—but because I want you to learn. Use this site if you want, or find a video or a different site that works for you.
+		</p>
 		</div>
-		<h2 class="text-2xl">code.<a href="https://altie122.xyz" class=" italic text-red-500">altie122.xyz</a> coming soon!</h2>
+		<div class="flex flex-col gap-2 justify-center items-center">
+			<h2 class="prose-h2">
+				Want to start learning? Check out some of my tutorials!
+			</h2>
+			<div class="w-fit">
+				<TutorialButton />
+			</div>
+		</div>
 	</main>
 </Layout>

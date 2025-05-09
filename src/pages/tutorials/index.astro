@@ -1,0 +1,22 @@
+---
+import { TutorialButton } from '@/components/home/tutorial-button';
+import Layout from '@/layouts/BaseLayout.astro';
+import { ExampleCodeEditor } from '@/components/home/example-code-editor';
+import { Button } from '@/components/ui/button';
+---
+
+<Layout>
+	<main class="container mx-auto p-2">
+    <h1 class="prose-h1">
+      Tutorials
+    </h1>
+    <p class="prose-p">
+      Coming soon!
+    </p>
+    <Button variant="default" asChild client:load>
+      <a href="/">
+        <span aria-label="Home">Home</span>
+      </a>
+    </Button>
+	</main>
+</Layout>
