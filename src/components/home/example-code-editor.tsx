@@ -1,10 +1,9 @@
-import * as monaco from "monaco-editor";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { useCodeEditorCore } from "../base/editor";
 
 const LS_PREFIX = "homepage-hero-example-";
-const LS_CODE = `${LS_PREFIX}code`;
 const LS_COMPLETED = `${LS_PREFIX}completed`;
 const LS_CONGRATULATED = `${LS_PREFIX}congratulated`;
 
@@ -28,13 +27,12 @@ const DEFAULT_CODE = `<!DOCTYPE html>
 `;
 
 export function ExampleCodeEditor() {
-  const editorRef = useRef<HTMLDivElement>(null);
-  const monacoEditorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(
-    null
-  );
-  const [value, setValue] = useState<string>(() => {
-    return localStorage.getItem(LS_CODE) || DEFAULT_CODE;
+  const { editorRef, value, handleReset } = useCodeEditorCore({
+    prefix: LS_PREFIX,
+    language: "html",
+    starterCode: DEFAULT_CODE,
   });
+
   const [completed, setCompleted] = useState<boolean>(() => {
     return localStorage.getItem(LS_COMPLETED) === "true";
   });
@@ -42,122 +40,11 @@ export function ExampleCodeEditor() {
     return localStorage.getItem(LS_CONGRATULATED) === "true";
   });
 
-  // Save to localStorage whenever value, completed, or congratulated changes
+  // Save to localStorage whenever completed or congratulated changes
   useEffect(() => {
-    localStorage.setItem(LS_CODE, value);
     localStorage.setItem(LS_COMPLETED, String(completed));
     localStorage.setItem(LS_CONGRATULATED, String(congratulated));
-  }, [value, completed, congratulated]);
-
-  const handleReset = () => {
-    // Reset the state
-    setValue(DEFAULT_CODE);
-    setCompleted(false);
-    setCongratulated(false);
-    
-    // Update the editor content if it exists
-    if (monacoEditorRef.current) {
-      monacoEditorRef.current.setValue(DEFAULT_CODE);
-    }
-    
-    // Clear localStorage
-    localStorage.setItem(LS_CODE, DEFAULT_CODE);
-    localStorage.setItem(LS_COMPLETED, "false");
-    localStorage.setItem(LS_CONGRATULATED, "false");
-    
-    toast.info("Editor has been reset to default code");
-  };
-
-  useEffect(() => {
-    if (!editorRef.current) return;
-
-    monaco.languages.html.htmlDefaults.setOptions({
-      format: {
-        tabSize: 2,
-        insertSpaces: true,
-        wrapLineLength: 120,
-        unformatted: "",
-        contentUnformatted: "pre,code,textarea",
-        indentInnerHtml: false,
-        preserveNewLines: true,
-        maxPreserveNewLines: undefined,
-        indentHandlebars: false,
-        endWithNewline: false,
-        extraLiners: "head, body, /html",
-        wrapAttributes: "auto",
-      },
-      suggest: {
-        html5: true,
-      },
-    });
-
-    monaco.languages.registerCompletionItemProvider("html", {
-      triggerCharacters: [">"],
-      provideCompletionItems: (model, position) => {
-        const codePre: string = model.getValueInRange({
-          startLineNumber: position.lineNumber,
-          startColumn: 1,
-          endLineNumber: position.lineNumber,
-          endColumn: position.column,
-        });
-
-        const tag = codePre.match(/.*<(\w+)>$/)?.[1];
-
-        if (!tag) {
-          return;
-        }
-
-        const word = model.getWordUntilPosition(position);
-
-        return {
-          suggestions: [
-            {
-              label: `</${tag}>`,
-              kind: monaco.languages.CompletionItemKind.EnumMember,
-              insertText: `$1</${tag}>`,
-              insertTextRules:
-                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-              range: {
-                startLineNumber: position.lineNumber,
-                endLineNumber: position.lineNumber,
-                startColumn: word.startColumn,
-                endColumn: word.endColumn,
-              },
-            },
-          ],
-        };
-      },
-    });
-
-    const editor = monaco.editor.create(editorRef.current, {
-      value,
-      language: "html",
-      automaticLayout: true,
-      theme: "vs-dark",
-      autoClosingBrackets: "always",
-      autoClosingComments: "always",
-      autoClosingOvertype: "always",
-      autoClosingQuotes: "always",
-      autoIndent: "advanced",
-      wordBasedSuggestionsOnlySameLanguage: true,
-      formatOnPaste: true,
-      formatOnType: true,
-    });
-
-    monacoEditorRef.current = editor;
-
-    // Update state when editor content changes
-    editor.onDidChangeModelContent(() => {
-      setValue(editor.getValue());
-    });
-
-    // Cleanup
-    return () => {
-      editor.dispose();
-    };
-    // Only run on mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [completed, congratulated]);
 
   useEffect(() => {
     let completed = false;
@@ -185,11 +72,19 @@ export function ExampleCodeEditor() {
     }
   }, [value, congratulated]);
 
+  const handleFullReset = () => {
+    handleReset();
+    setCompleted(false);
+    setCongratulated(false);
+    localStorage.setItem(LS_COMPLETED, "false");
+    localStorage.setItem(LS_CONGRATULATED, "false");
+  };
+
   return (
     <div className='flex flex-col rounded-t-xl border border-border shadow w-full'>
       <div className="flex flex-row justify-between items-center p-2">
         <h2 className='prose-h2-nounderline'>Try it out!</h2>
-        <Button variant="outline" onClick={handleReset}>Reset</Button>
+        <Button variant="outline" onClick={handleFullReset}>Reset</Button>
       </div>
       <iframe srcDoc={value} title='preview' className='h-80 w-full' />
       <div ref={editorRef} id='editor' className='h-80 w-full' />
