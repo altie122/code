@@ -1,0 +1,36 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  previousPage?: string;
+  nextPage?: string;
+}
+
+const { title, description, previousPage, nextPage } = Astro.props;
+---
+
+<BaseLayout>
+  <main class='min-h-[calc(100dvh-var(--spacing)*16)]'>
+    <section class='border-grid border-b'>
+      <div class='container-wrapper'>
+        <div
+          class='containerless-prose p-2 container flex flex-col gap-1 py-8 md:py-10 lg:py-12'
+        >
+          <h1 class=''>
+            {title}
+          </h1>
+          {description && <p set:html={description.replaceAll('&\\hl;', '<span class="hl">').replaceAll('&/hl;', '</span>')} />}
+        </div>
+      </div>
+    </section>
+    <section class='border-grid border-b'>
+      <div class='container-wrapper'>
+        <div class='p-2 container'>
+          <slot />
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

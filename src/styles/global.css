@@ -121,72 +121,87 @@
 }
 
 @layer utilities {
+  /* The following 3 classes are sourced from https://github.com/shadcn-ui/ui/blob/main/apps/www/styles/globals.css */
+  .border-grid {
+    @apply border-border/50 dark:border-border;
+  }
+  .container-wrapper {
+    @apply max-w-[1400px] min-[1800px]:max-w-screen-2xl min-[1400px]:border-x border-border/70 dark:border-border mx-auto w-full;
+  }
+  .inner-container {
+    @apply px-4 xl:px-6 mx-auto max-w-screen-2xl;
+  }
+  /* The following classes are based on Shadcn UI's typography guidelines with a lot of modifications https://ui.shadcn.com/docs/components/typography */
   .prose {
     @apply container mx-auto px-4 pt-8 pb-16 sm:px-6 lg:px-8 max-w-[1024px];
   }
   .prose h1,
+  .containerless-prose h1,
   .prose-h1 {
     @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
   }
   .prose h2,
+  .containerless-prose h2,
   .prose-h2 {
     @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
   }
   .prose-h2-nounderline {
     @apply text-3xl font-semibold;
   }
-  .prose .noborder {
-    @apply border-none;
+  .prose .noborder, .containerless-prose .noborder {
+    @apply border-none! p-0! m-0!;
   }
   .prose h3,
+  .containerless-prose h3,
   .prose-h3 {
     @apply scroll-m-20 text-2xl font-semibold tracking-tight;
   }
   .prose h4,
+  .containerless-prose h4,
   .prose-h4 {
     @apply scroll-m-20 text-xl font-semibold tracking-tight;
   }
   .prose p,
+  .containerless-prose p,
   .prose-p {
     @apply leading-7 [&:not(:first-child)]:mt-6;
   }
   .prose blockquote,
+  .containerless-prose blockquote,
   .prose-blockquote {
     @apply mt-6 border-l-2 pl-6 italic;
   }
   .prose ul,
+  .containerless-prose ul,
   .prose-ul {
     @apply my-6 ml-6 list-disc [&>li]:mt-2;
   }
   .prose ol,
+  .containerless-prose ol,
   .prose-ol {
     @apply my-6 ml-6 list-decimal [&>li]:mt-2;
   }
   .prose a,
+  .containerless-prose a,
   .prose-a {
     @apply text-pink-500 underline;
   }
   .prose b,
+  .containerless-prose b,
   .prose-b {
     @apply font-bold;
   }
   .prose dl,
+  .containerless-prose dl,
   .prose-dl {
     @apply my-6 ml-6 list-disc [&>dt]:mt-2 [&>dd]:ml-6;
   }
   .prose dt,
+  .containerless-prose dt,
   .prose-dt {
     @apply font-bold;
   }
-  .mention {
-    border-radius: 3px !important;
-    padding: 0 2px !important;
-    transition: background-color 50ms ease-out, color 50ms ease-out !important;
-    cursor: pointer !important;
-    border-radius: 3px !important;
-    padding: 0 2px !important;
-    font-weight: 500 !important;
-    unicode-bidi: plaintext !important;
-    background: hsl(235 calc(1 * 85.6%) 64.7% / 0.3) 100% !important;
+  .hl {
+    @apply text-pink-500 font-black;
   }
 }

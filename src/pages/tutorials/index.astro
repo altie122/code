@@ -1,22 +1,49 @@
 ---
-import { TutorialButton } from '@/components/home/tutorial-button';
-import Layout from '@/layouts/BaseLayout.astro';
-import { ExampleCodeEditor } from '@/components/home/example-code-editor';
-import { Button } from '@/components/ui/button';
+import { tutorials } from "@/pages/tutorials/_tutorials";
+import Layout from "@/layouts/tutorials-home-layout.astro";
+import { TutorialCard } from "@/components/tutorials/card";
 ---
 
-<Layout>
-	<main class="container mx-auto p-2">
-    <h1 class="prose-h1">
-      Tutorials
-    </h1>
-    <p class="prose-p">
-      Coming soon!
-    </p>
-    <Button variant="default" asChild client:load>
-      <a href="/">
-        <span aria-label="Home">Home</span>
-      </a>
-    </Button>
-	</main>
+<Layout
+  title='Tutorials'
+  description='All of the tutorials available on &\\hl;code.altie122.xyz&/hl;'
+>
+  {
+    tutorials.map((tutorial, index) => (
+      <>
+        <section class='border-grid border-b'>
+          <div class='container-wrapper'>
+            <div class='containerless-prose p-2 container flex flex-col gap-1 py-8 md:py-10 lg:py-12'>
+              <h2 class="noborder">{tutorial.title}</h2>
+              {tutorial.description && (
+                <p
+                  set:html={tutorial.description
+                    .replaceAll("&\\hl;", "<span class='hl'>")
+                    .replaceAll("&/hl;", "</span>")}
+                />
+              )}
+            </div>
+          </div>
+        </section>
+        <section class='border-grid border-b'>
+          <div class='container-wrapper'>
+            <div class='p-2 container'>
+              <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
+                {tutorial.tutorials.map((tutorial, index) => (
+                  <TutorialCard
+                    title={tutorial.title}
+                    description={tutorial.description}
+                    imageURL={tutorial.imageURL}
+                    technologies={tutorial.technologies}
+                    framework={tutorial.framework}
+                    interactive={tutorial.interactive}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
+    ))
+  }
 </Layout>

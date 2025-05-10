@@ -62,9 +62,9 @@ export function ExampleCodeEditor() {
     setCompleted(completed);
 
     if (completed && !congratulated) {
-      toast.success("Congratulations! You have completed the example code!", {
+      toast.success("Congratulations! Example code completed!", {
         action: {
-          label: "Check out our actual tutorials",
+          label: "Explore tutorials",
           onClick: () => (window.location.href = "/tutorials"),
         },
       });
@@ -82,12 +82,16 @@ export function ExampleCodeEditor() {
 
   return (
     <div className='flex flex-col rounded-t-xl border border-border shadow w-full'>
-      <div className="flex flex-row justify-between items-center p-2">
+      <div className='flex flex-row justify-between items-center p-2'>
         <h2 className='prose-h2-nounderline'>Try it out!</h2>
-        <Button variant="outline" onClick={handleFullReset}>Reset</Button>
+        <Button variant='outline' onClick={handleFullReset}>
+          Reset
+        </Button>
       </div>
-      <iframe srcDoc={value} title='preview' className='h-80 w-full' />
-      <div ref={editorRef} id='editor' className='h-80 w-full' />
+      <div className="flex flex-col lg:flex-row">
+        <iframe srcDoc={value} title='preview' className='h-160 w-full lg:order-2' />
+        <div ref={editorRef} id='editor' className='h-160 w-full lg:order-1' />
+      </div>
     </div>
   );
 }
