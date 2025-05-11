@@ -2,6 +2,7 @@
 import { Navbar } from "@/components/common/navbar";
 import "../styles/global.css";
 import { Toaster } from "@/components/ui/sonner";
+import { Footer } from "@/components/common/footer";
 ---
 <script is:inline>
 	const getThemePreference = () => {
@@ -26,13 +27,15 @@ import { Toaster } from "@/components/ui/sonner";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/ico" href="/icon.ico" />
+		<link rel="icon" type="image/png" href="/icon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>code.altie122.xyz</title>
 	</head>
 	<body>
 		<Navbar client:load />
 		<slot />
+		<Footer client:load />
 		<Toaster client:load />
 	</body>
 </html>

@@ -31,6 +31,7 @@ export function ExampleCodeEditor() {
     prefix: LS_PREFIX,
     language: "html",
     starterCode: DEFAULT_CODE,
+
   });
 
   const [completed, setCompleted] = useState<boolean>(() => {
@@ -81,17 +82,31 @@ export function ExampleCodeEditor() {
   };
 
   return (
-    <div className='flex flex-col rounded-t-xl border border-border shadow w-full'>
-      <div className='flex flex-row justify-between items-center p-2'>
-        <h2 className='prose-h2-nounderline'>Try it out!</h2>
-        <Button variant='outline' onClick={handleFullReset}>
-          Reset
-        </Button>
+    <section className='border-grid border-b'>
+      <div className='container-wrapper'>
+        <div className='container flex flex-col gap-1 py-8 md:py-10 lg:py-12'>
+          <div className='flex flex-col w-full'>
+            <div className='flex flex-row justify-between items-center p-2'>
+              <h2 className='prose-h2-nounderline'>Try it out!</h2>
+              <Button variant='outline' onClick={handleFullReset}>
+                Reset
+              </Button>
+            </div>
+            <div className='flex flex-col lg:flex-row'>
+              <iframe
+                srcDoc={value}
+                title='preview'
+                className='h-160 w-full lg:order-2'
+              />
+              <div
+                ref={editorRef}
+                id='editor'
+                className='h-160 w-full lg:order-1'
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col lg:flex-row">
-        <iframe srcDoc={value} title='preview' className='h-160 w-full lg:order-2' />
-        <div ref={editorRef} id='editor' className='h-160 w-full lg:order-1' />
-      </div>
-    </div>
+    </section>
   );
 }

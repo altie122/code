@@ -4,7 +4,7 @@ import { ModeToggle } from "./theme-toggle";
 export function Navbar() {
   return (
     <nav
-      className='w-full h-12 bg-background/90 backdrop-blur-lg top-0 sticky flex flex-row justify-between items-center p-2 border-b border-border'
+      className='w-full h-12 bg-background/90 backdrop-blur-lg top-0 sticky flex flex-row justify-between items-center p-2 border-b border-border z-9999'
       aria-label='Main navigation bar'
     >
       <Button variant='ghost' asChild>

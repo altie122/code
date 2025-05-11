@@ -128,7 +128,7 @@
   .container-wrapper {
     @apply max-w-[1400px] min-[1800px]:max-w-screen-2xl min-[1400px]:border-x border-border/70 dark:border-border mx-auto w-full;
   }
-  .inner-container {
+  .container {
     @apply px-4 xl:px-6 mx-auto max-w-screen-2xl;
   }
   /* The following classes are based on Shadcn UI's typography guidelines with a lot of modifications https://ui.shadcn.com/docs/components/typography */
@@ -139,6 +139,9 @@
   .containerless-prose h1,
   .prose-h1 {
     @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  }
+  .prose-h1-override {
+    @apply scroll-m-20! text-4xl! font-extrabold! tracking-tight! lg:text-5xl!;
   }
   .prose h2,
   .containerless-prose h2,
@@ -185,6 +188,9 @@
   .containerless-prose a,
   .prose-a {
     @apply text-pink-500 underline;
+  }
+  .prose-a-remove-style {
+    @apply text-inherit! no-underline!;
   }
   .prose b,
   .containerless-prose b,

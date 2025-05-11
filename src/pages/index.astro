@@ -1,51 +1,83 @@
 ---
-import { TutorialButton } from '@/components/home/tutorial-button';
-import Layout from '../layouts/BaseLayout.astro';
-import { ExampleCodeEditor } from '@/components/home/example-code-editor';
+import { TutorialButton } from "@/components/home/tutorial-button";
+import Layout from "../layouts/BaseLayout.astro";
+import { ExampleCodeEditor } from "@/components/home/example-code-editor";
 ---
 
 <Layout>
-	<main class="container mx-auto p-2">
-		<!-- Hero section -->
-		<header class="grid xl:grid-cols-2 gap-2">
-			<div class="flex flex-col justify-center items-center">
-				<h1 class="prose-h1 text-center">
-					Welcome to <span class="text-pink-500">code.altie122.xyz</span>
-				</h1>
-				<p class="prose-p">
-					Please note: this is <b>NOT</b> a code reference site; this website is for tutorials. There are plans to add code references in the future. For now, <a href="https://www.w3schools.com/" class="prose-a">w3schools</a> is recommended for reference needs, as they provide informative and easy-to-understand content. (<b>Neither altie122 nor this site is affiliated with w3schools; they're just a good resource for actual code references.</b>)
-				</p>
-				<h2 class="prose-h2">
-					Learning to code? Curious about coding?
-				</h2>
-				<p class="prose-h3 text-center">
-					Check out these tutorials!
-				</p>
-				<TutorialButton />
-			</div>
-		</header>
-		<ExampleCodeEditor client:only="react" />
-		<div>
-		<h2 class="prose-h2">
-			Why does Code.altie122.xyz exist?
-		</h2>
-		<p class="prose-p">
-			Code.altie122.xyz was created because there are <b>very</b> few good resources for learning to code from start to finish.
-		</p>
-		<h2 class="prose-h2">
-			Why not use something else?
-		</h2>
-		<p class="prose-p">
-			Feel free to explore other options! All we want is for you to learn to code, if you have found a better resource, go for it!
-		</p>
-		</div>
-		<div class="flex flex-col gap-2 justify-center items-center">
-			<h2 class="prose-h2">
-				Ready to start learning? Check out these tutorials!
-			</h2>
-			<div class="w-fit">
-				<TutorialButton />
-			</div>
-		</div>
-	</main>
+  <main>
+    <!-- Hero section -->
+    <header class='border-grid border-b'>
+      <div class='container-wrapper'>
+        <div
+          class='containerless-prose container grid grid-cols-1 xl:grid-cols-2'
+        >
+          <div
+            class='border-grid xl:border-r h-full py-8 md:py-10 lg:py-12 pr-4 xl:pr-8'
+          >
+            <h1 class='text-center'>
+              Welcome to <span class='hl'>code.altie122.xyz</span>
+            </h1>
+            <p>
+              Welcome to <span class='hl'>code.altie122.xyz</span>! We are a
+              small code tutorial website that aims to provide a simple and
+              easy-to-understand resource for learning to code. Some of our
+              tutorials are even interactive on the website itself! We aim to
+              make learning to code as simple and unintimidating as possible!
+            </p>
+          </div>
+          <div
+            class='h-full py-8 md:py-10 lg:py-12 flex flex-col gap-2 justify-center items-center pl-4 xl:pr-8'
+          >
+            <h2 class='prose-h1-override noborder'>Want to get started?</h2>
+            <p>Check out these tutorials!</p>
+            <TutorialButton />
+          </div>
+        </div>
+      </div>
+    </header>
+    <ExampleCodeEditor client:only='react' />
+    <section>
+      <div class='border-grid border-b'>
+        <div class='container-wrapper'>
+          <div
+            class='containerless-prose p-2 container flex flex-col gap-1 py-8 md:py-10 lg:py-12'
+          >
+            <h2 class='noborder'>Why does Code.altie122.xyz exist?</h2>
+            <p>
+              Code.altie122.xyz was created because there are <b>very</b> few good
+              resources for learning to code from start to finish without being too
+              intimidating.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class='border-grid border-b'>
+        <div class='container-wrapper'>
+          <div
+            class='containerless-prose p-2 container flex flex-col gap-1 py-8 md:py-10 lg:py-12'
+          >
+            <h2 class='noborder'>Why not use something else?</h2>
+            <p>
+              Feel free to explore other options! All we want is for you to
+              learn to code, if you have found a better resource, go for it!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class='border-grid border-b'>
+        <div class='container-wrapper'>
+          <div
+            class='containerless-prose p-2 container flex flex-col gap-2 py-8 md:py-10 lg:py-12 justify-center items-center'
+          >
+            <h2 class='noborder prose-h1-override'>Ready to start learning?</h2>
+						<p>Check out these tutorials!</p>
+            <div class='w-fit'>
+              <TutorialButton />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
